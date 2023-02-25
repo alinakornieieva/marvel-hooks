@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './RandomCharacterCard.css'
 import {Container, Row, Col} from 'react-bootstrap'
 import MarvelService from '../../services/MarvelService';
