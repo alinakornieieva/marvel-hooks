@@ -1,0 +1,42 @@
+.info{
+    padding: 25px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+}
+.info-img{
+    width: 150px;
+    height: 150px;
+}
+.info-first-section{
+    display: grid;
+    grid-template-columns: 150px auto;
+    grid-column-gap: 20px;
+}
+.info-btns{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+.info-btns .btn-1{
+    margin-bottom: 10px;
+    width: 98.84px;
+}
+.info p{
+    font-size: 14px;
+    margin-top: 20px;
+}
+ul{
+    list-style-type: none;
+    padding: 0;
+}
+li{
+    margin-bottom: 8px;
+    line-height: 25px;
+    font-size: 16px;
+    font-weight: 500;
+    box-shadow: rgba(0, 0, 0, 0.15) 1px 3px 3px 1px;
+}
+.info-comics{
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}

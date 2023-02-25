@@ -1,0 +1,24 @@
+.card-item-name{
+    background-color: #232222;
+    color: white;
+    font-weight: bold;
+    padding: 10px 0 0 10px;
+    box-sizing: border-box;
+    height: 80px;
+    width: 200px;
+    font-size: 18px;
+}
+.cards-grid{
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+    grid-gap: 20px;
+    margin-bottom: 20px;
+}
+.cards .btn-1{
+    display: block;
+    margin: 0 auto;
+}
+.selected-card{
+    box-shadow: 0 5px 20px rgba(188, 30, 30, 0.54);
+    transform: translateY(-8px);
+}   
