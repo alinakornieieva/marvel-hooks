@@ -11,9 +11,7 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 const App = () => {
   const [selectedChar, setSelectedChar] = useState(null)
   const recieveCharId = (id) => {
-    setSelectedChar({
-      selectedChar: id
-    })
+    setSelectedChar(id)
   }
   return (
     <div className="App">
