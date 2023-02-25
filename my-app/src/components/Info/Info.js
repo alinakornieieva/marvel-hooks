@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types';
 import MarvelService from '../../services/MarvelService'
 import './Info.css'
@@ -6,66 +6,44 @@ import Error from '../Error/Error'
 import Preloader from '../Preloader/Preloader'
 import Skeleton from '../Skeleton/Skeleton'
 
-class Info extends Component {
-    state = {
-        char: null,
-        isFetching: false,
-        hasError: false
-    }
-    service = new MarvelService()
-    componentDidMount() {
-        // this.service.getCharacter(1011400).then(this.onCharLoaded).catch(this.onError)
-        //this.props.charId
-        // console.log('mount')
-        // this.updateCharacter(1011400)
-    }
-    componentDidUpdate(prevProps) {
-        // debugger 
-        //чтобы посмотреть что в prevprops 
-        // this.service.getCharacter(this.props.charId).then(this.onCharLoaded).catch(this.onError)
-        // console.log('update')
-        if (prevProps.charId !== this.props.charId) {
-            this.updateCharacter()
-        }
-    }
-    updateCharacter = () => {
-        if (!this.props.charId) {
+const Info = (props) => {
+    const [char, setChar] = useState(null)
+    const [isFetching, setFetching] = useState(false)
+    const [hasError, setError] = useState(false)
+    const service = new MarvelService()
+    useEffect(() => {
+        updateCharacter()
+    }, [props.charId])
+    const updateCharacter = () => {
+        if (!props.charId) {
             return
         }
-        this.onCharLoading()
-        this.service.getCharacter(this.props.charId).then(this.onCharLoaded).catch(this.onError)
+        onCharLoading()
+        service.getCharacter(props.charId).then(onCharLoaded).catch(onError)
     }
-    onCharLoaded = (char) => {
-        this.setState({
-            char,
-            isFetching: false
-        })
+    const onCharLoaded = (char) => {
+        setChar(char)
+        setFetching(false)
     }
-    onCharLoading = () => {
-        this.setState({
-            isFetching: true
-        })
+    const onCharLoading = () => {
+        setFetching(true)
     }
-    onError = () => {
-        this.setState({
-            hasError: true,
-            isFetching: false
-        })
+    const onError = () => {
+        setError(true)
+        setFetching(false)
     }
-    render() {
-        const error = this.state.hasError ? <Error/> : null
-        const fetching = this.state.isFetching ? <Preloader/> : null
-        const content = !(error || fetching || !this.state.char) ? <View data={this.state.char}/> : null
-        const skeleton = error || fetching || this.state.char ? null : <Skeleton/> 
-        return(
-            <div className="info">
-                {error}
-                {fetching}
-                {content}
-                {skeleton}
-            </div>
-        )
-    }
+    const error = hasError ? <Error/> : null
+    const fetching = isFetching ? <Preloader/> : null
+    const content = !(error || fetching || !char) ? <View data={char}/> : null
+    const skeleton = error || fetching || char ? null : <Skeleton/> 
+    return(
+        <div className="info">
+            {error}
+            {fetching}
+            {content}
+            {skeleton}
+        </div>
+    )
 }
 
 const View = (props) => {

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import PropTypes from 'prop-types'
 import MarvelService from "../../services/MarvelService"
 import Preloader from "../Preloader/Preloader"
@@ -12,8 +12,8 @@ const Cards = (props) => {
     const [offset, setOffset] = useState(210)
     const [newItemsLoading, setNewItemsLoading] = useState(false)
     const [listEnd, setListEnd] = useState(false)
-
     const service = new MarvelService()
+
     useEffect(() => {
         service.getAllCharacters()
         .then(onFirstCharListLoaded).catch(onError)

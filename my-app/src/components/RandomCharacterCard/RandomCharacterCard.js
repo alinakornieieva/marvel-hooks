@@ -10,10 +10,10 @@ const RandomCharacterCard = () => {
     const [char, setChar] = useState({})
     const [isFetching, setFetching] = useState(true)
     const [hasError, setError] = useState(false)
+    const service = new MarvelService()
     useEffect(() => {
         updateCharacter()
     }, [])
-    const service = new MarvelService()
     const onCharLoaded = (char) => {
         setChar(char)
         setFetching(false)
