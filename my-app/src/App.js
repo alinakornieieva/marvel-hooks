@@ -6,6 +6,7 @@ import RandomCharacterCard from './components/RandomCharacterCard/RandomCharacte
 import Header from './components/Header/Header';
 import Info from './components/Info/Info';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import Comics from './components/Comics/Comics';
 
 
 const App = () => {
@@ -16,7 +17,8 @@ const App = () => {
   return (
     <div className="App">
       <Header/>
-      <ErrorBoundary>
+      <Comics/>
+      {/* <ErrorBoundary>
         <RandomCharacterCard/>
       </ErrorBoundary>
       <div className='cards-info'>
@@ -26,7 +28,7 @@ const App = () => {
         <ErrorBoundary>
           <Info charId={selectedChar}/>
         </ErrorBoundary>
-      </div>
+      </div> */}
     </div>
   );
 }
