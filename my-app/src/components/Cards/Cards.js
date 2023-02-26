@@ -7,8 +7,6 @@ import CardItems from "./CardItems"
 
 const Cards = (props) => {
     const [charList, setCharList] = useState([])
-    // const [isFetching, setFetching] = useState(true)
-    // const [hasError, setError] = useState(false)
     const [offset, setOffset] = useState(210)
     const [newItemsLoading, setNewItemsLoading] = useState(false)
     const [listEnd, setListEnd] = useState(false)
@@ -41,14 +39,9 @@ const Cards = (props) => {
         }
         setCharList((charList) => [...charList, ...newItems])
         setNewItemsLoading(false)
-        // setFetching(false)
         setOffset((offset) => offset + 9)
         setListEnd(ended)
     }
-    // const onError = () => {
-    //     setError(true)
-    //     setFetching(false)
-    // }
     const spinner = fetching && !newItemsLoading ? <Preloader/> : null
     const errorMessage = error ? <Error/> : null
     const content = !(errorMessage || spinner) ? <CardItems listEnd={listEnd} onRequest={onRequest} offset={offset} newItemsLoading={newItemsLoading} data={charList} recieveCharId={props.recieveCharId}/> : null

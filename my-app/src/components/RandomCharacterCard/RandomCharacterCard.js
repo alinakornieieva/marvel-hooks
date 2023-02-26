@@ -8,7 +8,7 @@ import Error from '../Error/Error';
 
 const RandomCharacterCard = () => {
     const [char, setChar] = useState({})
-    const {fetching, error, getCharacter} = useMarvelService()
+    const {fetching, error, getCharacter, clearError} = useMarvelService()
     useEffect(() => {
         updateCharacter()
     }, [])
@@ -16,6 +16,7 @@ const RandomCharacterCard = () => {
         setChar(char)
     }
     const updateCharacter = () => {
+        clearError()
         const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000)
         getCharacter(id).then(onCharLoaded)
     }

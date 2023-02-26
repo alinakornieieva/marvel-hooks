@@ -8,9 +8,6 @@ import Skeleton from '../Skeleton/Skeleton'
 
 const Info = (props) => {
     const [char, setChar] = useState(null)
-    // const [isFetching, setFetching] = useState(false)
-    // const [hasError, setError] = useState(false)
-    
     const {error, fetching, getCharacter} = useMarvelService()
     
     useEffect(() => {
@@ -20,20 +17,11 @@ const Info = (props) => {
         if (!props.charId) {
             return
         }
-        // onCharLoading()
         getCharacter(props.charId).then(onCharLoaded)
     }
     const onCharLoaded = (char) => {
         setChar(char)
-        // setFetching(false)
     }
-    // const onCharLoading = () => {
-    //     setFetching(true)
-    // }
-    // const onError = () => {
-    //     setError(true)
-    //     setFetching(false)
-    // }
     const errorMessage = error ? <Error/> : null
     const spinner = fetching ? <Preloader/> : null
     const content = !(errorMessage || spinner || !char) ? <View data={char}/> : null
