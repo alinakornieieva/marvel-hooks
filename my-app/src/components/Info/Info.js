@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types';
-import MarvelService from '../../services/MarvelService'
+import useMarvelService from '../../services/MarvelService'
 import './Info.css'
 import Error from '../Error/Error'
 import Preloader from '../Preloader/Preloader'
@@ -8,9 +8,11 @@ import Skeleton from '../Skeleton/Skeleton'
 
 const Info = (props) => {
     const [char, setChar] = useState(null)
-    const [isFetching, setFetching] = useState(false)
-    const [hasError, setError] = useState(false)
-    const service = new MarvelService()
+    // const [isFetching, setFetching] = useState(false)
+    // const [hasError, setError] = useState(false)
+    
+    const {error, fetching, getCharacter} = useMarvelService()
+    
     useEffect(() => {
         updateCharacter()
     }, [props.charId])
@@ -18,28 +20,28 @@ const Info = (props) => {
         if (!props.charId) {
             return
         }
-        onCharLoading()
-        service.getCharacter(props.charId).then(onCharLoaded).catch(onError)
+        // onCharLoading()
+        getCharacter(props.charId).then(onCharLoaded)
     }
     const onCharLoaded = (char) => {
         setChar(char)
-        setFetching(false)
+        // setFetching(false)
     }
-    const onCharLoading = () => {
-        setFetching(true)
-    }
-    const onError = () => {
-        setError(true)
-        setFetching(false)
-    }
-    const error = hasError ? <Error/> : null
-    const fetching = isFetching ? <Preloader/> : null
-    const content = !(error || fetching || !char) ? <View data={char}/> : null
-    const skeleton = error || fetching || char ? null : <Skeleton/> 
+    // const onCharLoading = () => {
+    //     setFetching(true)
+    // }
+    // const onError = () => {
+    //     setError(true)
+    //     setFetching(false)
+    // }
+    const errorMessage = error ? <Error/> : null
+    const spinner = fetching ? <Preloader/> : null
+    const content = !(errorMessage || spinner || !char) ? <View data={char}/> : null
+    const skeleton = errorMessage || spinner || char ? null : <Skeleton/> 
     return(
         <div className="info">
-            {error}
-            {fetching}
+            {errorMessage}
+            {spinner}
             {content}
             {skeleton}
         </div>

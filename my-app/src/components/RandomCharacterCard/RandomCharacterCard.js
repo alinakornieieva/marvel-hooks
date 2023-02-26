@@ -1,44 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import './RandomCharacterCard.css'
 import {Container, Row, Col} from 'react-bootstrap'
-import MarvelService from '../../services/MarvelService';
+import useMarvelService from '../../services/MarvelService';
 import Preloader from '../Preloader/Preloader';
 import Error from '../Error/Error';
 
 
 const RandomCharacterCard = () => {
     const [char, setChar] = useState({})
-    const [isFetching, setFetching] = useState(true)
-    const [hasError, setError] = useState(false)
-    const service = new MarvelService()
+    const {fetching, error, getCharacter} = useMarvelService()
     useEffect(() => {
         updateCharacter()
     }, [])
     const onCharLoaded = (char) => {
         setChar(char)
-        setFetching(false)
-    }
-    const onCharLoading = () => {
-        setFetching(true)
-    }
-    const onError = () => {
-        setFetching(false)
-        setError(true)
     }
     const updateCharacter = () => {
         const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000)
-        onCharLoading()
-        service.getCharacter(id).then(onCharLoaded).catch(onError)
+        getCharacter(id).then(onCharLoaded)
     }
-    const error = hasError ? <Error/> : null
-    const fetching = isFetching ? <Preloader/> : null
-    const content = !(error || fetching) ? <View data={char}/> : null
+    const errorMessage = error ? <Error/> : null
+    const spinner = fetching ? <Preloader/> : null
+    const content = !(errorMessage || spinner) ? <View data={char}/> : null
     return(
         <Container className='container'>
             <Row>
                 <Col className='character-card-col-1'>
-                    {error}
-                    {fetching}
+                    {errorMessage}
+                    {spinner}
                     {content}
                 </Col>
             <Col className='character-card-col-2'>

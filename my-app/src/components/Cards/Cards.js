@@ -1,33 +1,35 @@
 import { useEffect, useState } from "react"
 import PropTypes from 'prop-types'
-import MarvelService from "../../services/MarvelService"
+import useMarvelService from "../../services/MarvelService"
 import Preloader from "../Preloader/Preloader"
 import Error from "../Error/Error"
 import CardItems from "./CardItems"
 
 const Cards = (props) => {
     const [charList, setCharList] = useState([])
-    const [isFetching, setFetching] = useState(true)
-    const [hasError, setError] = useState(false)
+    // const [isFetching, setFetching] = useState(true)
+    // const [hasError, setError] = useState(false)
     const [offset, setOffset] = useState(210)
     const [newItemsLoading, setNewItemsLoading] = useState(false)
     const [listEnd, setListEnd] = useState(false)
-    const service = new MarvelService()
+    
+    const {error, fetching, getAllCharacters} = useMarvelService()
 
     useEffect(() => {
-        service.getAllCharacters()
-        .then(onFirstCharListLoaded).catch(onError)
+        getAllCharacters()
+        .then(onFirstCharListLoaded)
     }, [])
 
     const onFirstCharListLoaded = (newItems) => {
         setCharList([...newItems])
         setNewItemsLoading(false)
-        setFetching(false)
         setOffset((offset) => offset + 9)
     }
     const onRequest = (offset) => {
         onCharListLoading()
-        service.getAllCharacters(offset).then(onCharListLoaded).catch(onError)
+        setNewItemsLoading(true)
+
+        getAllCharacters(offset).then(onCharListLoaded)
     }
     const onCharListLoading = () => {
         setNewItemsLoading(true)
@@ -39,21 +41,21 @@ const Cards = (props) => {
         }
         setCharList((charList) => [...charList, ...newItems])
         setNewItemsLoading(false)
-        setFetching(false)
+        // setFetching(false)
         setOffset((offset) => offset + 9)
         setListEnd(ended)
     }
-    const onError = () => {
-        setError(true)
-        setFetching(false)
-    }
-    const loading = isFetching ? <Preloader/> : null
-    const error = hasError ? <Error/> : null
-    const content = !(loading || error) ? <CardItems listEnd={listEnd} onRequest={onRequest} offset={offset} newItemsLoading={newItemsLoading} data={charList} recieveCharId={props.recieveCharId}/> : null
+    // const onError = () => {
+    //     setError(true)
+    //     setFetching(false)
+    // }
+    const spinner = fetching && !newItemsLoading ? <Preloader/> : null
+    const errorMessage = error ? <Error/> : null
+    const content = !(errorMessage || spinner) ? <CardItems listEnd={listEnd} onRequest={onRequest} offset={offset} newItemsLoading={newItemsLoading} data={charList} recieveCharId={props.recieveCharId}/> : null
     return(
         <div className="cards">
-            {loading}
-            {error}
+            {errorMessage}
+            {spinner}
             {content}
         </div>
     )
