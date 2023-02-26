@@ -1,13 +1,8 @@
-.comics-card{
-    border: 1px solid red;
-    padding: 10px;
-    height: 200px;
-}
 .comics-section{
     display: grid;
     justify-content: center;
     grid-template-columns: 200px 200px 200px 200px;
-    grid-gap: 20px;
+    grid-gap: 60px;
     margin-bottom: 20px;
 }
 .comics-btn{
@@ -15,3 +10,9 @@
     margin: 0 auto;
     
 }
+.comics-section img{
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+    width: 225px;
+    height: 345px;
+}
+

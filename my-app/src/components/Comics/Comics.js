@@ -49,8 +49,8 @@ const View = (props) => {
     return(
         <>
         <div className="comics-section">
-            {props.data.map((item, i) => <div key={i} className="comics-card">
-                <img src={item.thumbnail} alt={item.title} />
+            {props.data.map((item, i) => <div key={i}>
+                <img src={item.img} alt={item.title} />
                 <div>{item.title}</div>
                 <div>{item.price}</div>
             </div> )}
