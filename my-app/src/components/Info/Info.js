@@ -8,7 +8,7 @@ import Skeleton from '../Skeleton/Skeleton'
 
 const Info = (props) => {
     const [char, setChar] = useState(null)
-    const {error, fetching, getCharacter} = useMarvelService()
+    const {error, fetching, getCharacter, clearError} = useMarvelService()
     
     useEffect(() => {
         updateCharacter()
@@ -17,6 +17,7 @@ const Info = (props) => {
         if (!props.charId) {
             return
         }
+        clearError()
         getCharacter(props.charId).then(onCharLoaded)
     }
     const onCharLoaded = (char) => {
