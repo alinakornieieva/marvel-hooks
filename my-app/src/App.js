@@ -8,6 +8,7 @@ import Info from './components/Info/Info';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import Comics from './components/Comics/Comics';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import PageNotFound from './components/Pages/404 Page/404';
 
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
       <div className="App">
       <Header/>
       <Routes>
+        <Route path='*' element={<PageNotFound/>}/>
         <Route path='/' element={<CharSection 
         recieveCharId={recieveCharId}
         charId={selectedChar}/>}/>

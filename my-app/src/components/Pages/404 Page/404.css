@@ -1,0 +1,14 @@
+.page-not-found{
+    margin-top: 40px;
+}
+.navlink-not-found-page{
+    text-align: center;
+    text-decoration: none;
+    color: #9F0013;
+    font-size: 20px;
+    font-weight: 600;
+}
+.navlink-not-found-page:hover{
+    color: #9f0013ac;
+}
+
