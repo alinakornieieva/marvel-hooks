@@ -9,6 +9,7 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import Comics from './components/Comics/Comics';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import PageNotFound from './components/Pages/404 Page/404';
+import ComicsBanner from './components/ComicsBanner/ComicsBanner';
 
 
 const App = () => {
@@ -25,23 +26,20 @@ const App = () => {
         <Route path='/' element={<CharSection 
         recieveCharId={recieveCharId}
         charId={selectedChar}/>}/>
-        <Route path='/comics' element={<Comics/>}/>
+        <Route path='/comics' element={<ComicsPage/>}/>
       </Routes>
-      {/* <Comics/> */}
-      {/* <ErrorBoundary>
-        <RandomCharacterCard/>
-      </ErrorBoundary>
-      <div className='cards-info'>
-        <ErrorBoundary>
-          <Cards recieveCharId={recieveCharId}/>
-        </ErrorBoundary>
-        <ErrorBoundary>
-          <Info charId={selectedChar}/>
-        </ErrorBoundary>
-      </div> */}
     </div>
     </Router>
   );
+}
+
+const ComicsPage = () => {
+  return(
+    <>
+      <ComicsBanner/>  
+      <Comics/>
+    </>
+  )
 }
 
 const CharSection = (props) => {

@@ -1,0 +1,15 @@
+.comics-banner{
+    height: 100px;
+    padding: 0 25px 0 45px;
+    margin: 20px 0 30px;
+    display: grid;
+    background-color: #232222;
+    grid-template-columns: 152px auto 133px;
+}
+.comics-banner p{
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    padding-top: 18px;
+}

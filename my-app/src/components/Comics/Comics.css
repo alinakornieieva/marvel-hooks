@@ -1,7 +1,7 @@
 .comics-section{
     display: grid;
-    justify-content: center;
-    grid-template-columns: 200px 200px 200px 200px;
+    justify-items: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 60px;
     margin-bottom: 20px;
 }
