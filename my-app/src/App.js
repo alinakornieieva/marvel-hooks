@@ -7,6 +7,7 @@ import Header from './components/Header/Header';
 import Info from './components/Info/Info';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import Comics from './components/Comics/Comics';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
 
 const App = () => {
@@ -15,9 +16,16 @@ const App = () => {
     setSelectedChar(id)
   }
   return (
-    <div className="App">
+    <Router>
+      <div className="App">
       <Header/>
-      <Comics/>
+      <Routes>
+        <Route path='/' element={<CharSection 
+        recieveCharId={recieveCharId}
+        charId={selectedChar}/>}/>
+        <Route path='/comics' element={<Comics/>}/>
+      </Routes>
+      {/* <Comics/> */}
       {/* <ErrorBoundary>
         <RandomCharacterCard/>
       </ErrorBoundary>
@@ -30,7 +38,26 @@ const App = () => {
         </ErrorBoundary>
       </div> */}
     </div>
+    </Router>
   );
+}
+
+const CharSection = (props) => {
+  return(
+    <>
+    <ErrorBoundary>
+        <RandomCharacterCard/>
+      </ErrorBoundary>
+      <div className='cards-info'>
+        <ErrorBoundary>
+          <Cards recieveCharId={props.recieveCharId}/>
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <Info charId={props.selectedChar}/>
+        </ErrorBoundary>
+      </div> 
+    </>
+  )
 }
 
 export default App;
