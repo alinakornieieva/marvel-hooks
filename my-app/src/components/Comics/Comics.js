@@ -3,6 +3,7 @@ import useMarvelService from "../../services/MarvelService"
 import './Comics.css'
 import Error from "../Error/Error"
 import Preloader from "../Preloader/Preloader"
+import { NavLink } from "react-router-dom"
 
 const Comics = () => {
     const [comicsList, setComicsList] = useState([])
@@ -50,7 +51,9 @@ const View = (props) => {
         <>
         <div className="comics-section">
             {props.data.map((item, i) => <div key={i}>
+                <NavLink to={`/comics/${item.id}`}>
                 <img src={item.img} alt={item.title} />
+                </NavLink>
                 <div>{item.title}</div>
                 <div>{item.price}</div>
             </div> )}

@@ -10,6 +10,7 @@ import Comics from './components/Comics/Comics';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import PageNotFound from './components/Pages/404 Page/404';
 import ComicsBanner from './components/ComicsBanner/ComicsBanner';
+import ComicPage from './components/Pages/ComicPage/ComicPage';
 
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
         recieveCharId={recieveCharId}
         charId={selectedChar}/>}/>
         <Route path='/comics' element={<ComicsPage/>}/>
+        <Route path='/comics/:comicId' element={<ComicPage/>}/>
       </Routes>
     </div>
     </Router>
