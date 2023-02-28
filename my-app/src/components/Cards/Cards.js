@@ -10,7 +10,7 @@ const Cards = (props) => {
     const [offset, setOffset] = useState(210)
     const [newItemsLoading, setNewItemsLoading] = useState(false)
     const [listEnd, setListEnd] = useState(false)
-    
+
     const {error, fetching, getAllCharacters} = useMarvelService()
 
     useEffect(() => {
@@ -26,7 +26,6 @@ const Cards = (props) => {
     const onRequest = (offset) => {
         onCharListLoading()
         setNewItemsLoading(true)
-
         getAllCharacters(offset).then(onCharListLoaded)
     }
     const onCharListLoading = () => {
@@ -51,7 +50,7 @@ const Cards = (props) => {
             {spinner}
             {content}
         </div>
-    )
+)
 }
 
 Cards.propTypes = {

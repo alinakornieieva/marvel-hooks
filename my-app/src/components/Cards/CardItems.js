@@ -8,12 +8,12 @@ const CardItems = (props) => {
         itemRef.current[id].classList.add('selected-card')
     }
     return(
-        <>
-            <div className="cards-grid">
-                {props.data.map((item, i)=>
-                  <div ref={(el) => itemRef.current[i] = el}
-                  key={item.id}
-                  onClick={() => {
+      <>
+        <div className="cards-grid">
+            {props.data.map((item, i)=>
+            <div ref={(el) => itemRef.current[i] = el}
+                key={item.id} 
+                onClick={() => {
                     onFocus(i)
                     props.recieveCharId(item.id)}}> 
                 <img style={{width: '200px', height: '200px'}} src={item.thumbnail} alt={item.name} />
@@ -21,8 +21,7 @@ const CardItems = (props) => {
                     {item.name}
                 </div>
             </div>
-                  )}
-
+            )}
             </div>
             <button className="btn-1" 
             style={{display: props.listEnd ? 'none' : 'block'}}
