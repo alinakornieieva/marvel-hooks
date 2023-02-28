@@ -11,7 +11,7 @@
 }
 .cards-info{
   display: grid;
-  grid-template-columns: 650px 425px
+  grid-template-columns: 650px 450px
 }
 .btn-1, .btn-2{
   color: white;

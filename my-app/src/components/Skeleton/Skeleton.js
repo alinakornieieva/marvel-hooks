@@ -4,7 +4,7 @@ import ContentLoader from 'react-content-loader'
 const Skeleton = (props) => {
     return(
         <>
-    <div>Please select a character to see information</div>
+    <div style={{fontWeight: 600, fontSize: '18px', marginBottom: '20px'}}>Please select a character to see information</div>
 
         
         <ContentLoader 
