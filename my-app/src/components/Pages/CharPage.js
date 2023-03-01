@@ -3,6 +3,7 @@ import RandomCharacterCard from '../RandomCharacterCard/RandomCharacterCard'
 import Cards from '../Cards/Cards'
 import Info from '../Info/Info'
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary'
+import FindChar from '../FindChar/FindChar'
 
 const CharPage = () => {
     const [selectedChar, setSelectedChar] = useState(null)
@@ -18,9 +19,12 @@ const CharPage = () => {
           <ErrorBoundary>
             <Cards recieveCharId={recieveCharId}/>
           </ErrorBoundary>
-          <ErrorBoundary>
-            <Info charId={selectedChar}/>
-          </ErrorBoundary>
+          <div>
+            <ErrorBoundary>
+              <Info charId={selectedChar}/>
+            </ErrorBoundary>
+            <FindChar/>
+          </div>
         </div> 
       </>
     )
