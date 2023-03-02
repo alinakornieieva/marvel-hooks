@@ -29,8 +29,11 @@
     margin-right: 10px;
 }
 .error{
-    color: red;
+    color: #9F0013;
     margin-top: 15px;
     font-size: 18px;
     font-weight: 500;
 } 
+.find-char button:disabled{
+    opacity: 0.5;
+}

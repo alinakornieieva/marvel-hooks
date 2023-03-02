@@ -13,7 +13,7 @@ const SingleFindChar = (props) => {
             </Helmet>
             <img src={props.data.thumbnail} alt="character" />
             <div>
-                <div>{props.data.name}</div>
+                <div className='title'>{props.data.name}</div>
                 <div>{props.data.description}</div>
             </div>
         </div>

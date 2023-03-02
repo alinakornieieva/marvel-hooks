@@ -26,14 +26,16 @@ const FindChar = () => {
             validationSchema={Yup.object({
                 character: Yup.string().required('This field is required')
             })}
-            onSubmit={({character})=> updateChar(character)}
+            onSubmit={(values, {resetForm}) => {
+                updateChar(values.character)
+                resetForm({character: ''})
+            }}
             >
-                <Form className='form'>
-                    <Field className='input' type="text" name="character" id="character" placeholder="Enter name"/>
-                    <button className="btn-1" type="submit">FIND</button>
-                    <ErrorMessage className='error' name='character' component='div'/>
-                    {results}
-                </Form>
+            <Form className='form'>
+                <Field className='input' type="text" name="character" id="character" placeholder="Enter name"/>
+                <button className="btn-1" disabled={fetching} type="submit">FIND</button>
+                {results || <ErrorMessage className='error' name='character' component='div'/>}
+            </Form>
             </Formik>
         </div>
     )
