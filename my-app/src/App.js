@@ -1,5 +1,6 @@
 import { lazy, Suspense, useState } from 'react';
 import './App.css';
+import {Helmet} from 'react-helmet'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header/Header';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
@@ -16,6 +17,13 @@ const App = () => {
   return (
     <Router>
       <div className="App">
+    <Helmet>
+        <meta
+      name="description"
+      content="Marvel information portal created using React" 
+    />
+    <title>Marvel</title>
+    </Helmet>
       <Header/>
         <Suspense fallback={<Preloader/>}>
             <Routes>

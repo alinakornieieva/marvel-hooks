@@ -1,9 +1,17 @@
 import './ComicPage.css'
 import { NavLink } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 const ComicPage = (props) => {
     return(
         <div className='comic-page'>
+             <Helmet>
+                <meta
+                name="description"
+                content={`Marvel comic - ${props.data.title}`}
+                />
+                <title>{props.data.title}</title>
+            </Helmet>
             <img src={props.data.img} alt="comic" />
             <div>
                 <p className="comic-title">{props.data.title}</p>
