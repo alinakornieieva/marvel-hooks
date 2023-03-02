@@ -1,0 +1,7 @@
+.single-char{
+    display: flex;
+}
+.single-char img{
+    width: 500px;
+    margin-right: 20px;
+}

@@ -23,7 +23,7 @@ const CharPage = () => {
             <ErrorBoundary>
               <Info charId={selectedChar}/>
             </ErrorBoundary>
-            <FindChar/>
+            <FindChar />
           </div>
         </div> 
       </>
