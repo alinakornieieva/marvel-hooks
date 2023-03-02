@@ -16,8 +16,8 @@ const FindChar = () => {
         setCharByName(char)
     }
     const results = !charByName ? null : charByName.length > 0 ? 
-    <div><NavLink to={`/characters/${charByName[0].id}`}><button type='button' className='btn-2'>TO PAGE</button></NavLink></div> : 
-    <div>Page wasn`t found</div>
+    <div className='visit'><span>There is! Visit {charByName[0].name} page?</span><NavLink to={`/characters/${charByName[0].id}`}><button type='button' className='btn-2'>TO PAGE</button></NavLink></div> : 
+    <div className='error'>Page wasn`t found</div>
     return(
         <div className="find-char">
             <div className='find-char-title'>Or find a character by name:</div>
@@ -30,8 +30,8 @@ const FindChar = () => {
             >
                 <Form className='form'>
                     <Field className='input' type="text" name="character" id="character" placeholder="Enter name"/>
-                    <ErrorMessage name='character' component='div'/>
                     <button className="btn-1" type="submit">FIND</button>
+                    <ErrorMessage className='error' name='character' component='div'/>
                     {results}
                 </Form>
             </Formik>
