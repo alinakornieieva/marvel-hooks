@@ -8,16 +8,9 @@ import SinglePage from './components/Pages/SinglePage';
 import ComicPage from './components/Pages/SingleComicPage/ComicPage';
 import SingleFindChar from './components/Pages/SingleCharPage/SingleFindChar';
 
-
-//динамические импорты
 const PageNotFound = lazy(() => import('./components/Pages/404 Page/404'))
-// const SinglePage = lazy(() => ('./components/Pages/SinglePage'))
 const CharPage = lazy(() => import('./components/Pages/CharPage'))
-// const ComicPage = lazy(() => import('./components/Pages/SingleComicPage/ComicPage'))
 const ComicsPage = lazy(() => import('./components/Pages/ComicsPage'))
-// const SingleFindChar = lazy(() => import('./components/Pages/SingleCharPage/SingleFindChar'))
-
-//
 
 const App = () => {
   return (
