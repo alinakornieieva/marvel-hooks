@@ -7,6 +7,10 @@
 }
 .single-char .title{
     font-size: 26px;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 20px;
+    color: #9F0013;
+}
+.single-char button{
+    margin-top: 20px;
 }

@@ -19,7 +19,7 @@ const ComicPage = (props) => {
                 <p>{props.data.pageCount}</p>
                 <p>Language: {props.data.language}</p>
                 <p className="comic-price">{props.data.price}</p>
-                <NavLink to='/comics'><div>Back to comics</div></NavLink>
+                <NavLink to='/comics'><button className='btn-1'>BACK TO COMICS PAGE</button></NavLink>
             </div>
         </div>
     )
