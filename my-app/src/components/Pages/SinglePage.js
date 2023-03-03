@@ -8,7 +8,7 @@ import Preloader from "../Preloader/Preloader"
 const SinglePage = ({dataType, Component}) => {
     const {id} = useParams()
     const [data, setData] = useState(null)
-    const {error, fetching, getCharacter, getComic, clearError} = useMarvelService()
+    const {process, setProcess, getCharacter, getComic, clearError} = useMarvelService()
     useEffect(() => {
         updateChar()
     }, [id])
@@ -16,25 +16,29 @@ const SinglePage = ({dataType, Component}) => {
         clearError()
         switch (dataType) {
             case 'comic': 
-            getComic(id).then(onCharLoaded)
+            getComic(id).then(onCharLoaded).then(() => setProcess('success'))
             break;
             case 'char': 
-            getCharacter(id).then(onCharLoaded)
+            getCharacter(id).then(onCharLoaded).then(() => setProcess('success'))
         }
     }
     const onCharLoaded = (data) => {
         setData(data)
     }
-    const errorMessage = error ? <Error/> : null
-    const spinner = fetching ? <Preloader/> : null
-    const content = !(errorMessage || spinner || !data) ? <Component data={data}/> : null
-
+    const setContent = (process, Component, data) => {
+        switch(process) {
+            case 'fetching': 
+            return <Preloader/>
+            case 'error': 
+            return <Error/> 
+            case 'success':
+            return <Component data={data}/>
+        }
+    }
     return(
         <>
             <ComicsBanner/>
-            {errorMessage}
-            {spinner}
-            {content}
+            {setContent(process, Component, data)}
         </>
     )
 }

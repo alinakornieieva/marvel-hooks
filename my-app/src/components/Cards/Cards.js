@@ -11,11 +11,11 @@ const Cards = (props) => {
     const [newItemsLoading, setNewItemsLoading] = useState(false)
     const [listEnd, setListEnd] = useState(false)
 
-    const {error, fetching, getAllCharacters} = useMarvelService()
+    const {process, setProcess, getAllCharacters} = useMarvelService()
 
     useEffect(() => {
         getAllCharacters()
-        .then(onFirstCharListLoaded)
+        .then(onFirstCharListLoaded).then(() => setProcess('success'))
     }, [])
 
     const onFirstCharListLoaded = (newItems) => {
@@ -26,7 +26,7 @@ const Cards = (props) => {
     const onRequest = (offset) => {
         onCharListLoading()
         setNewItemsLoading(true)
-        getAllCharacters(offset).then(onCharListLoaded)
+        getAllCharacters(offset).then(onCharListLoaded).then(() => setProcess('success'))
     }
     const onCharListLoading = () => {
         setNewItemsLoading(true)
@@ -41,14 +41,21 @@ const Cards = (props) => {
         setOffset((offset) => offset + 9)
         setListEnd(ended)
     }
-    const spinner = fetching && !newItemsLoading ? <Preloader/> : null
-    const errorMessage = error ? <Error/> : null
-    const content = !(errorMessage || spinner) ? <CardItems listEnd={listEnd} onRequest={onRequest} offset={offset} newItemsLoading={newItemsLoading} data={charList} recieveCharId={props.recieveCharId}/> : null
+    const setContent = (process) => {
+        switch(process) {
+            case 'waiting':
+            return <Preloader/>
+            case 'fetching': 
+            return newItemsLoading ? <CardItems listEnd={listEnd} onRequest={onRequest} offset={offset} newItemsLoading={newItemsLoading} data={charList} recieveCharId={props.recieveCharId}/> : <Preloader/> 
+            case 'error': 
+            return <Error/> 
+            case 'success':
+            return  <CardItems listEnd={listEnd} onRequest={onRequest} offset={offset} newItemsLoading={newItemsLoading} data={charList} recieveCharId={props.recieveCharId}/>
+        }
+    }
     return(
         <div className="cards">
-            {errorMessage}
-            {spinner}
-            {content}
+            {setContent(process)}
         </div>
 )
 }

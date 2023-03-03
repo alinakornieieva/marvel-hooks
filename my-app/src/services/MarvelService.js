@@ -6,7 +6,7 @@ const useMarvelService = () => {
     const _baseCharOffset = 210
     const _baseComicsOffset = 0
 
-    const {request, error, fetching, clearError} = useHttp()
+    const {request, process, setProcess, clearError} = useHttp()
   
     const getAllCharacters = async (offset = _baseCharOffset) => {
         const res = await request(`${_apiBase}characters?limit=9&offset=${offset}&${_apiKey}`)
@@ -50,7 +50,7 @@ const useMarvelService = () => {
             comics: res.comics.items ? res.comics.items.slice(0, 10) : null
         }
     }
-    return {error, fetching, getAllCharacters, getCharacter, clearError, getComics, getComic, getCharByName}
+    return {process, setProcess, getAllCharacters, getCharacter, clearError, getComics, getComic, getCharByName}
 }
 
 export default useMarvelService

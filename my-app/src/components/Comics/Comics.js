@@ -11,9 +11,9 @@ const Comics = () => {
     const [listEnd, setListEnd] = useState(false)
     const [offset, setOffset] = useState(0)
 
-    const {getComics, error, fetching} = useMarvelService()
+    const {getComics, process, setProcess} = useMarvelService()
     useEffect(() => {
-        getComics().then(onFirstComicsLoaded)
+        getComics().then(onFirstComicsLoaded).then(() => setProcess('success'))
     }, [])
     const onFirstComicsLoaded = (comics) => {
         setNewItemsLoading(false)
@@ -22,7 +22,7 @@ const Comics = () => {
     }
     const loadMore = (offset) => {
         setNewItemsLoading(true)
-        getComics(offset).then(onComicsLoaded)
+        getComics(offset).then(onComicsLoaded).then(() => setProcess('success'))
     }
     const onComicsLoaded = (newComicsItems) => {
         let ended = false
@@ -34,14 +34,21 @@ const Comics = () => {
         setOffset((offset) => offset + 8)
         setListEnd(ended)
     }
-    const errorMessage = error ? <Error/> : null
-    const spinner = fetching && !loadingNewItems ? <Preloader/> : null
-    const content = !(errorMessage || spinner) ? <View loadingNewItems={loadingNewItems} listEnd={listEnd} loadMore={() => loadMore(offset)} data={comicsList}/> : null
+    const setContent = (process) => {
+        switch(process) {
+            case 'waiting':
+            return <Preloader/>
+            case 'fetching': 
+            return loadingNewItems ? <View loadingNewItems={loadingNewItems} listEnd={listEnd} loadMore={() => loadMore(offset)} data={comicsList}/> : <Preloader/> 
+            case 'error': 
+            return <Error/> 
+            case 'success':
+            return  <View loadingNewItems={loadingNewItems} listEnd={listEnd} loadMore={() => loadMore(offset)} data={comicsList}/> 
+        }
+    }
     return(
         <div >
-           {errorMessage}
-           {spinner}
-           {content}
+           {setContent(process)}
         </div>
     )
 }

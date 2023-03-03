@@ -8,7 +8,7 @@ import Error from '../Error/Error';
 
 const RandomCharacterCard = () => {
     const [char, setChar] = useState({})
-    const {fetching, error, getCharacter, clearError} = useMarvelService()
+    const {process, setProcess, getCharacter, clearError} = useMarvelService()
     useEffect(() => {
         updateCharacter()
     }, [])
@@ -18,18 +18,23 @@ const RandomCharacterCard = () => {
     const updateCharacter = () => {
         clearError()
         const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000)
-        getCharacter(id).then(onCharLoaded)
+        getCharacter(id).then(onCharLoaded).then(() => setProcess('success'))
     }
-    const errorMessage = error ? <Error/> : null
-    const spinner = fetching ? <Preloader/> : null
-    const content = !(errorMessage || spinner) ? <View data={char}/> : null
+    const setContent = (process) => {
+        switch(process) {
+            case 'fetching': 
+            return <Preloader/>
+            case 'error': 
+            return <Error/> 
+            case 'success':
+            return <View data={char}/>
+        }
+    }
     return(
         <Container className='container'>
             <Row>
                 <Col className='character-card-col-1'>
-                    {errorMessage}
-                    {spinner}
-                    {content}
+                    {setContent(process)}
                 </Col>
             <Col className='character-card-col-2'>
                 <div>
@@ -47,7 +52,6 @@ const RandomCharacterCard = () => {
                 <div>
                     <img src="../../../img/mjolnir.png" alt="" />
                 </div>
-
             </Col>
             </Row>
         </Container>
